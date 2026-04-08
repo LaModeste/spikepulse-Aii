@@ -1,0 +1,149 @@
+/* ─────────────────────────────────────────────
+   SpikePulse AI — Global Styles
+   Dark terminal aesthetic: deep blacks, neon accents
+   ───────────────────────────────────────────── */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables (always dark) ─────────────── */
+:root {
+  --background: 220 13% 5%;         /* near-black blue */
+  --foreground: 210 20% 92%;        /* off-white */
+
+  --card: 220 13% 8%;               /* slightly lifted */
+  --card-foreground: 210 20% 92%;
+
+  --border: 220 10% 14%;
+  --input: 220 10% 10%;
+  --ring: 160 100% 50%;             /* neon green focus */
+
+  --primary: 160 100% 50%;          /* #00ff88 spike-up */
+  --primary-foreground: 220 13% 5%;
+
+  --muted: 220 10% 14%;
+  --muted-foreground: 215 15% 55%;
+
+  --accent: 195 100% 50%;           /* #00d4ff pulse */
+  --accent-foreground: 220 13% 5%;
+
+  --radius: 0.5rem;
+}
+
+/* ── Base Resets ─────────────────────────────── */
+* {
+  box-sizing: border-box;
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Mono text utility ───────────────────────── */
+.font-mono {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+/* ── Scrollbar styling ───────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* ── Spike color utilities ───────────────────── */
+.text-spike-up   { color: #00ff88; }
+.text-spike-down { color: #ff3b5c; }
+.text-spike-warn { color: #ffb800; }
+.text-spike-pulse { color: #00d4ff; }
+
+.bg-spike-up-dim   { background: rgba(0, 255, 136, 0.08); }
+.bg-spike-down-dim { background: rgba(255, 59, 92, 0.08); }
+
+/* ── Glow effects ────────────────────────────── */
+.glow-up   { text-shadow: 0 0 10px rgba(0,255,136,0.6); }
+.glow-down { text-shadow: 0 0 10px rgba(255,59,92,0.6); }
+.glow-pulse { text-shadow: 0 0 12px rgba(0,212,255,0.7); }
+
+/* ── Grid pattern background ─────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(hsl(var(--border)) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Shimmer skeleton ────────────────────────── */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--card)) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── Table hover ─────────────────────────────── */
+.table-row-hover:hover {
+  background: hsl(var(--muted));
+  transition: background 0.1s;
+}
+
+/* ── Chat bubble animations ──────────────────── */
+.chat-bubble {
+  animation: slide_up 0.25s ease-out;
+}
+
+/* ── Thin gradient border card ───────────────── */
+.card-glow {
+  position: relative;
+  border: 1px solid transparent;
+  background: hsl(var(--card));
+  background-clip: padding-box;
+}
+.card-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0,255,136,0.3), rgba(0,212,255,0.1), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Live pulse dot ──────────────────────────── */
+.live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff88;
+  animation: pulse_glow 2s ease-in-out infinite;
+}

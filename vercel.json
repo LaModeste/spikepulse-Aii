@@ -1,0 +1,23 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "functions": {
+    "app/api/coins/route.ts": {
+      "maxDuration": 15
+    },
+    "app/api/chat/route.ts": {
+      "maxDuration": 30
+    },
+    "app/api/telegram/route.ts": {
+      "maxDuration": 15
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/telegram?action=sendSummary",
+      "schedule": "0 * * * *"
+    }
+  ]
+}
